@@ -1,3 +1,157 @@
+
+ng new mobile-test --mobile (Npm install hung so after about 20 minutes I used ctr+c to stop the process)
+npm install angular-cli
+typings install
+npm install
+(Changed out package .json to match the one baba has (current***)))
+npm install
+ng serve
+
+Adding material2 to your project
+
+npm install @angular2-material/core --save
+
+
+open the file angular-cli-build.js
+var Angular2App = require('angular-cli/lib/broccoli/angular2-app');
+
+module.exports = function(defaults) {
+  return new Angular2App(defaults, {
+    vendorNpmFiles: [
+      ADDD HERE   <-------------
+    ]
+  });
+};
+
+should look like this below 
+module.exports = function(defaults) {
+  return new Angular2App(defaults, {
+    vendorNpmFiles: [
+      'systemjs/dist/system-polyfills.js',
+      'systemjs/dist/system.src.js',
+      'zone.js/dist/**/*.+(js|js.map)',
+      'es6-shim/es6-shim.js',
+      'reflect-metadata/**/*.+(ts|js|js.map)',
+      'rxjs/**/*.+(js|js.map)',
+      '@angular/**/*.+(js|js.map)',
+	  '@angular2-material/**/*.js' <-------------
+    ]
+  });
+};
+
+
+
+
+OPSEN 
+
+system-config.ts
+/** Map relative paths to URLs. */
+const map: any = {
+  '@angular2-material': 'vendor/@angular2-material'
+};
+
+/** User packages configuration. */
+const packages: any = {
+  '@angular2-material/core': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'core.js'
+  },
+  '@angular2-material/checkbox': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'checkbox.js'
+  },
+  // And so on...
+};
+
+
+Example of use material2 component: (in app.component.ts)
+
+import { Component } from '@angular/core';
+import { MdCheckbox } from '@angular2-material/checkbox';
+
+@Component({
+  selector: 'my-app',
+  template: `<md-checkbox></md-checkbox>`,
+  directives: [MdCheckbox]
+})
+export class AppComponent { }
+
+
+
+
+
+
+
+Package.json
+(current***)
+
+{
+  "name": "angular-mobile",
+  "version": "0.0.0",
+  "license": "MIT",
+  "angular-cli": {},
+  "scripts": {
+    "start": "ng serve",
+    "postinstall": "typings install",
+    "lint": "tslint \"src/**/*.ts\"",
+    "test": "ng test",
+    "pree2e": "webdriver-manager update",
+    "e2e": "protractor"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
+    "@angular2-material/button": "^2.0.0-alpha.5-2",
+    "@angular2-material/card": "^2.0.0-alpha.5-2",
+    "@angular2-material/core": "^2.0.0-alpha.5-2",
+    "@angular2-material/icon": "^2.0.0-alpha.5-2",
+    "@angular2-material/input": "^2.0.0-alpha.5-2",
+    "@angular2-material/list": "^2.0.0-alpha.5-2",
+    "@angular2-material/sidenav": "^2.0.0-alpha.5-2",
+    "@angular2-material/toolbar": "^2.0.0-alpha.5-2",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "systemjs": "0.19.26",
+    "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
+    "@angular/platform-server": "2.0.0-rc.1",
+    "@angular/router-deprecated": "2.0.0-rc.1",
+    "@angular/service-worker": "^0.2.0",
+    "@angular/app-shell": "^0.0.0",
+    "angular2-broccoli-prerender": "^0.11.0",
+    "angular2-universal": "^0.100.3",
+    "angular2-universal-polyfills": "^0.4.1",
+    "preboot": "^2.0.10",
+    "angular-cli": "^1.0.0-beta.5",
+    "codelyzer": "0.0.19",
+    "ember-cli-inject-live-reload": "^1.4.0",
+    "jasmine-core": "^2.4.1",
+    "jasmine-spec-reporter": "^2.4.0",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8",
+    "protractor": "^3.3.0",
+    "ts-node": "^0.5.5",
+    "tslint": "^3.6.0",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1"
+  }
+}
+
+
+
+
+
 # angular-mobile
 
 ROUTING
